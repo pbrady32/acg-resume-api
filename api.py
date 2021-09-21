@@ -6,7 +6,7 @@ from google.cloud import firestore
 import flask
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+# app.config["DEBUG"] = True
 
 # The `project` parameter is optional and represents which project the client
 # will act on behalf of. If not supplied, the client falls back to the default
@@ -42,7 +42,8 @@ def add_one():
     return f"<h1>The current count is {doc_new_data['count']} as of today"
 
 
-app.run()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
 
 
 # def set_count():
