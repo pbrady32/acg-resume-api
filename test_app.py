@@ -13,13 +13,13 @@
 # limitations under the License.
 
 import unittest
-from app import hello
+from api import home
 
 
-class TestHelloApp(unittest.TestCase):
+class TestApp(unittest.TestCase):
 
     def test_hello(self):
-        self.assertEqual(hello(), "Hello World!\n")
+        self.assertEqual(home(), "<h1>API Home</h1>")
 
 
 if __name__ == '__main__':

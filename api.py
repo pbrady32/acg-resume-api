@@ -17,7 +17,7 @@ db = firestore.Client(project='ihpi-testing')
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+    return "<h1>API Home</h1>"
 
 
 # The Firestore we are using is: db.collection(u'visitors').document(u'visitcount')
