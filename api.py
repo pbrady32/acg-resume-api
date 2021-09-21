@@ -28,7 +28,7 @@ doc_ref = db.collection(u'visitors').document(u'visitcount')
 def get_count():
     doc_data = doc_ref.get().to_dict()
 
-    return f"<h1>The current count is {doc_data['count']} as of today"
+    return int(doc_data['count'])
 
 
 @app.route('/add', methods=['GET'])
