@@ -25,4 +25,4 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/acg-resume-api:$SHORT_SHA'
-# [END cloudbuild]
+# [END Cloudbuild]
