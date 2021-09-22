@@ -39,12 +39,13 @@ steps:
     # Configure Git to create commits with Cloud Build's service account
     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
     # Switch to the production branch and copy the kubernetes.yaml file from the candidate branch
-    git fetch origin production && git checkout production && \
-    git add -A && \
-    # git checkout $COMMIT_SHA kubernetes.yaml && \
+    gcloud source repos clone acg-resume-api-prod
+    cd acg-resume-api-prod
+    git pull https://source.developers.google.com/p/ihpi-testing/r/github_pbrady32_acg-resume-api
     # Commit the kubernetes.yaml file with a descriptive commit message
+    git add .
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
-    git push origin production
+    git push origin master
 # [END Cloudbuild]
