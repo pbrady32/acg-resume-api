@@ -37,10 +37,10 @@ steps:
   - |
     set -x && \
     # Configure Git to create commits with Cloud Build's service account
-    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
+    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \ git config --global user.email "pgbrady@umich.edu" && git config --global user.name "Patrick Brady" && \
     # Switch to the production branch and copy the kubernetes.yaml file from the candidate branch
     gcloud source repos clone acg-resume-api-prod
-    cd acg-resume-api-prod
+    cd /workspace/acg-resume-api-prod
     git pull https://source.developers.google.com/p/ihpi-testing/r/github_pbrady32_acg-resume-api
     # Commit the kubernetes.yaml file with a descriptive commit message
     git add .
