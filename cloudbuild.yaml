@@ -41,9 +41,9 @@ steps:
     # git config --global user.email "pgbrady@umich.edu"
     # git config --global user.name "Patrick Brady"
     git remote add google https://source.developers.google.com/p/ihpi-testing/r/acg-resume-api-prod
-
+    git checkout $COMMIT_SHA .
     # Commit the config with a descriptive commit message
-    git add .
+    # git add .
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
