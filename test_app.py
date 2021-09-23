@@ -19,7 +19,8 @@ from api import home
 class TestApp(unittest.TestCase):
 
     def test_hello(self):
-        self.assertEqual(home(), "<h1>API Home</h1>")
+        self.assertEqual(
+            home(), "<h1>This is the home of the pgbcloud.com visitor count API.</h1>")
 
 
 if __name__ == '__main__':
