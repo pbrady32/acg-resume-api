@@ -2,7 +2,7 @@ from google.cloud import firestore
 import os
 import flask
 from flask import jsonify
-from flask_cors import CORS
+from flask_cors import cross_origin
 
 
 app = flask.Flask(__name__)
