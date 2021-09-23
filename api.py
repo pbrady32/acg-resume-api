@@ -13,7 +13,7 @@ app = flask.Flask(__name__)
 # will act on behalf of. If not supplied, the client falls back to the default
 # project inferred from the environment.
 
-# db = firestore.Client(project='ihpi-testing')
+db = firestore.Client(project='ihpi-testing')
 
 
 @app.route('/', methods=['GET'])
@@ -22,25 +22,25 @@ def home():
 
 
 # The Firestore we are using is: db.collection(u'visitors').document(u'visitcount')
-# doc_ref = db.collection(u'visitors').document(u'visitcount')
+doc_ref = db.collection(u'visitors').document(u'visitcount')
 
 
-# @app.route('/count', methods=['GET'])
-# def get_count():
-#     doc_data = doc_ref.get().to_dict()
+@app.route('/count', methods=['GET'])
+def get_count():
+    doc_data = doc_ref.get().to_dict()
 
-#     return int(doc_data['count'])
+    return int(doc_data['count'])
 
 
-# @app.route('/add', methods=['GET'])
-# def add_one():
-#     # Set the count field
-#     doc_cur_data = doc_ref.get().to_dict()
-#     doc_ref.update({u'count': int(doc_cur_data['count'])+1})
+@app.route('/add', methods=['GET'])
+def add_one():
+    # Set the count field
+    doc_cur_data = doc_ref.get().to_dict()
+    doc_ref.update({u'count': int(doc_cur_data['count'])+1})
 
-#     # Call again to get updated value
-#     doc_new_data = doc_ref.get().to_dict()
-#     return f"<h1>The current count is {doc_new_data['count']} as of today"
+    # Call again to get updated value
+    doc_new_data = doc_ref.get().to_dict()
+    return f"<h1>The current count is {doc_new_data['count']} as of today"
 
 
 if __name__ == '__main__':
