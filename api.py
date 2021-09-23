@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 app = flask.Flask(__name__)
 # app.config["DEBUG"] = True
-cors = CORS(app, resources={r"/*": {"origins": "*pgbcloud.com"}})
+cors = CORS(app)
 
 db = firestore.Client()
 
@@ -41,4 +41,4 @@ def add_one():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
+    app.run(host='localhost', port=int(os.environ.get("PORT", 8080)))
