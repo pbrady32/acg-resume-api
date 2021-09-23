@@ -29,11 +29,10 @@ steps:
 # This step pushes the image to Artifact Registry
 # The PROJECT_ID and SHORT_SHA variables are automatically
 # replaced by Cloud Build.
-steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api', '.' ]
+  args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest', '.' ]
 images:
-- 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api'
+- 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest'
 # [END cloudbuild]
 
 
