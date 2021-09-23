@@ -51,5 +51,5 @@ steps:
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
-    git push google master
+    git push
 # [END Cloudbuild]
