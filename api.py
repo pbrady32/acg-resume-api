@@ -21,6 +21,11 @@ def home():
     return "<h1>API Home</h1>"
 
 
+@app.route('/test', methods=['GET'])
+def home():
+    return "<h1>Test page</h1>"
+
+
 # The Firestore we are using is: db.collection(u'visitors').document(u'visitcount')
 doc_ref = db.collection(u'visitors').document(u'visitcount')
 
