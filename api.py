@@ -22,7 +22,7 @@ def home():
 
 
 @app.route('/test', methods=['GET'])
-def home():
+def test():
     return "<h1>Test page</h1>"
 
 
