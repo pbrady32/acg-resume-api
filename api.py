@@ -16,14 +16,14 @@ db = firestore.Client()
 def home():
     return "<h1>This is the home of the pgbcloud.com visitor count API.</h1>"
 
-
 # The Firestore we are using is: db.collection(u'visitors').document(u'visitcount')
-doc_ref = db.collection(u'visitors').document(u'visitcount')
-
 
 # Set up a route to retrieve the current visitor count
+
+
 @app.route('/count', methods=['GET'])
 def get_count():
+    doc_ref = db.collection(u'visitors').document(u'visitcount')
     doc_data = doc_ref.get().to_dict()
     return jsonify({"count": doc_data['count']})
 
@@ -32,6 +32,7 @@ def get_count():
 @app.route('/add', methods=['GET'])
 def add_one():
     # Set the count field
+    doc_ref = db.collection(u'visitors').document(u'visitcount')
     doc_cur_data = doc_ref.get().to_dict()
     doc_ref.update({u'count': int(doc_cur_data['count'])+1})
 
