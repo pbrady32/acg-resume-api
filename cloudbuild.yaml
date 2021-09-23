@@ -31,8 +31,6 @@ steps:
 # replaced by Cloud Build.
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest', '.' ]
-images:
-  - 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest'
 # [END cloudbuild]
 
 
@@ -64,3 +62,6 @@ images:
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
     git push origin candidate
 # [END cloudbuild-trigger-cd]
+
+images:
+  - 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest'
