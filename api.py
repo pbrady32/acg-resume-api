@@ -3,6 +3,7 @@
 # $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\pgbrady\OneDrive - Michigan Medicine\Documents\Desktop\Cloud Computing\Google Cloud\resume_challenge_api\firestore.json"
 
 from google.cloud import firestore
+import os
 import flask
 
 app = flask.Flask(__name__)
@@ -43,7 +44,7 @@ def add_one():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
 
 
 # def set_count():
