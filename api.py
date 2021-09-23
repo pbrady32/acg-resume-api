@@ -2,17 +2,17 @@ from google.cloud import firestore
 import os
 import flask
 from flask import jsonify
-from flask_cors import cross_origin
+from flask_cors import CORS
 
 
 app = flask.Flask(__name__)
 # app.config["DEBUG"] = True
+cors = CORS(app, resources={r"/*": {"origins": "*pgbcloud.com"}})
 
 db = firestore.Client()
 
 
 @app.route('/', methods=['GET'])
-@cross_origin(origins='*pgbcloud.com')
 def home():
     return "<h1>This is the home of the pgbcloud.com visitor count API.</h1>"
 
@@ -23,7 +23,6 @@ doc_ref = db.collection(u'visitors').document(u'visitcount')
 
 # Set up a route to retrieve the current visitor count
 @app.route('/count', methods=['GET'])
-@cross_origin(origins='*pgbcloud.com')
 def get_count():
     doc_data = doc_ref.get().to_dict()
     return jsonify({"count": doc_data['count']})
@@ -31,7 +30,6 @@ def get_count():
 
 # Set up a route to increment the current visitor count by 1, and then return the current count
 @app.route('/add', methods=['GET'])
-@cross_origin(origins='*pgbcloud.com')
 def add_one():
     # Set the count field
     doc_cur_data = doc_ref.get().to_dict()
