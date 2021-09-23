@@ -47,9 +47,10 @@ steps:
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
-    git push origin master
+    
     #
-    # git remote add google https://source.developers.google.com/p/ihpi-testing/r/acg-resume-api-prod
+    git remote add google https://source.developers.google.com/p/ihpi-testing/r/acg-resume-api-prod
+    git push google master
     # # Commit the config with a descriptive commit message
     # git add .
     # git commit -m "Manifest from commit $COMMIT_SHA
