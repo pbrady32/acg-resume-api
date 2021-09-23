@@ -6,7 +6,7 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - 'pip install flask && pip install --upgrade google-cloud-firestore && python test_app.py -v'
+  - 'pip install flask &&  pip install -U flask-cors && pip install --upgrade google-cloud-firestore && python test_app.py -v'
 
 # This step builds the container image.
 - name: 'gcr.io/cloud-builders/docker'
@@ -30,6 +30,7 @@ steps:
 # The PROJECT_ID and SHORT_SHA variables are automatically
 # replaced by Cloud Build.
 - name: 'gcr.io/cloud-builders/docker'
+  id: Build for Artifact Registry
   args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest', '.' ]
 # [END cloudbuild]
 
