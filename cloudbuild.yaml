@@ -51,5 +51,5 @@ steps:
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
-    git push
+    git push https://source.developers.google.com/p/ihpi-testing/r/acg-resume-api-prod master
 # [END Cloudbuild]
