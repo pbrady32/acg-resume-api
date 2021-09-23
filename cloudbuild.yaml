@@ -25,34 +25,34 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/acg-resume-api:$SHORT_SHA'
+# [END cloudbuild]
 
-# This step copies the applied manifest to the production branch
-# The COMMIT_SHA variable is automatically
-# replaced by Cloud Build.
-- name: 'gcr.io/cloud-builders/git'
-  id: Copy to production branch
+
+# [START cloudbuild-trigger-cd]
+# This step clones the hello-cloudbuild-env repository
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Clone env repository
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    gcloud source repos clone acg-resume-api-prod && \
+    cd acg-resume-api-prod && \
+    git checkout candidate && \
+    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
+# This step pushes the manifest back to acg-resume-api-prod
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Push manifest
   entrypoint: /bin/sh
   args:
   - '-c'
   - |
     set -x && \
-    # Configure Git to create commits with Cloud Build's service account
-    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') 
-    # git config --global user.email "pgbrady@umich.edu"
-    # git config --global user.name "Patrick Brady"
-    # Switch to the production branch and copy the kubernetes.yaml file from the candidate branch
-    git fetch origin master && git checkout master && \
-    git checkout $COMMIT_SHA cloudbuild.yaml && \
-    # Commit the kubernetes.yaml file with a descriptive commit message
-    git commit -m "Manifest from commit $COMMIT_SHA
-    $(git log --format=%B -n 1 $COMMIT_SHA)" && \
-    # Push the changes back to Cloud Source Repository
-    git remote add google https://source.developers.google.com/p/ihpi-testing/r/acg-resume-api-prod
-    git push google master
-    # # Commit the config with a descriptive commit message
-    # git add .
-    # git commit -m "Manifest from commit $COMMIT_SHA
-    # $(git log --format=%B -n 1 $COMMIT_SHA)" && \
-    # # Push the changes back to Cloud Source Repository
-    # git push google master
-# [END CloudBuild]
+    cp api.py cloudbuild.yaml Dockerfile requirements.txt test_app.py acg-resume-api-prod/ && \
+    cd acg-resume-api-prod && \
+    git add . && \
+    git commit -m "Deploying image gcr.io/${PROJECT_ID}/acg-resume-api:${SHORT_SHA}
+    Built from commit ${COMMIT_SHA} of repository github_pbrady32_acg-resume-api
+    Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
+    git push origin candidate
+# [END cloudbuild-trigger-cd]
