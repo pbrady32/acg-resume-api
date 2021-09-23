@@ -48,7 +48,7 @@ steps:
   - '-c'
   - |
     set -x && \
-    cp api.py cloudbuild.yaml Dockerfile requirements.txt test_app.py acg-resume-api-prod/ && \
+    cp api.py cloudbuild.yaml cloudbuild-delivery.yaml Dockerfile requirements.txt test_app.py acg-resume-api-prod/ && \
     cd acg-resume-api-prod && \
     git add . && \
     git commit -m "Deploying image gcr.io/${PROJECT_ID}/acg-resume-api:${SHORT_SHA}
