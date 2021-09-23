@@ -34,7 +34,7 @@ doc_ref = db.collection(u'visitors').document(u'visitcount')
 def get_count():
     doc_data = doc_ref.get().to_dict()
 
-    return int(doc_data['count'])
+    return {"count": doc_data['count']}
 
 
 @app.route('/add', methods=['GET'])
@@ -49,7 +49,7 @@ def add_one():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
+    app.run(host='localhost', port=int(os.environ.get("PORT", 8080)))
 
 
 # def set_count():
