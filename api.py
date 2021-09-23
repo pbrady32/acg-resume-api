@@ -37,7 +37,7 @@ def add_one():
 
     # Call again to get updated value
     doc_new_data = doc_ref.get().to_dict()
-    return f"The current count is {doc_new_data['count']}"
+    return jsonify({"result": f"The current count is {doc_new_data['count']}. Incremented by 1"})
 
 
 if __name__ == '__main__':
