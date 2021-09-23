@@ -1,42 +1,31 @@
-# TODO
-# Set env variable for GCloud Service Account for this session to:
-# $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\pgbrady\OneDrive - Michigan Medicine\Documents\Desktop\Cloud Computing\Google Cloud\resume_challenge_api\firestore.json"
-
 from google.cloud import firestore
 import os
 import flask
+from flask import jsonify
 
 app = flask.Flask(__name__)
 # app.config["DEBUG"] = True
 
-# The `project` parameter is optional and represents which project the client
-# will act on behalf of. If not supplied, the client falls back to the default
-# project inferred from the environment.
-
-db = firestore.Client(project='ihpi-testing')
+db = firestore.Client()
 
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>API Home</h1>"
-
-
-@app.route('/test', methods=['GET'])
-def test():
-    return "<h1>Test page</h1>"
+    return "<h1>This is the home of the pgbcloud.com visitor count API.</h1>"
 
 
 # The Firestore we are using is: db.collection(u'visitors').document(u'visitcount')
 doc_ref = db.collection(u'visitors').document(u'visitcount')
 
 
+# Set up a route to retrieve the current visitor count
 @app.route('/count', methods=['GET'])
 def get_count():
     doc_data = doc_ref.get().to_dict()
+    return jsonify({"count": doc_data['count']})
 
-    return {"count": doc_data['count']}
 
-
+# Set up a route to increment the current visitor count by 1, and then return the current count
 @app.route('/add', methods=['GET'])
 def add_one():
     # Set the count field
@@ -45,19 +34,8 @@ def add_one():
 
     # Call again to get updated value
     doc_new_data = doc_ref.get().to_dict()
-    return f"<h1>The current count is {doc_new_data['count']} as of today"
+    return f"The current count is {doc_new_data['count']}"
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
-
-
-# def set_count():
-#     doc_ref = db.collection(u'visitors').document(u'visitcount')
-#     doc_ref.set({
-#         u'count': 0
-#     })
-#     print("set the count")
-
-
-# set_count()
