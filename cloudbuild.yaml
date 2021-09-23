@@ -31,9 +31,9 @@ steps:
 # replaced by Cloud Build.
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest', '.' ]
+  args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api', '.' ]
 images:
-- 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest'
+- 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api'
 # [END cloudbuild]
 
 
