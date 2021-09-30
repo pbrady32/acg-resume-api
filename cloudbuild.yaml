@@ -34,9 +34,6 @@ steps:
     Built from commit ${COMMIT_SHA} of repository github_pbrady32_acg-resume-api
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
     git push origin candidate
-
-images:
-  - 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest'
 # [END cloudbuild]
 
 
@@ -66,3 +63,6 @@ images:
 # - name: 'gcr.io/cloud-builders/docker'
 #   id: Build for Artifact Registry
 #   args: [ 'build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest', '.' ]
+
+# images:
+#   - 'us-east4-docker.pkg.dev/$PROJECT_ID/acg-resume-api/acg-resume-api:latest'
