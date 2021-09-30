@@ -7,8 +7,7 @@ steps:
   args:
   - -c
   - 'pip install flask &&  pip install -U flask-cors && pip install --upgrade google-cloud-firestore && python test_app.py -v'
-# [START cloudbuild-trigger-cd]
-# This step clones the hello-cloudbuild-env repository
+# This step clones the acg-resume-api-prod repository
 - name: 'gcr.io/cloud-builders/gcloud'
   id: Clone env repository
   entrypoint: /bin/sh
@@ -19,7 +18,7 @@ steps:
     cd acg-resume-api-prod && \
     git checkout candidate && \
     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
-# This step pushes the manifest back to acg-resume-api-prod
+# This step pushes the code to acg-resume-api-prod candidate branch
 - name: 'gcr.io/cloud-builders/gcloud'
   id: Push manifest
   entrypoint: /bin/sh

@@ -16,11 +16,8 @@ db = firestore.Client()
 def home():
     return "<h1>This is the home of the pgbcloud.com visitor count API.</h1>"
 
-# The Firestore we are using is: db.collection(u'visitors').document(u'visitcount')
 
 # Set up a route to retrieve the current visitor count
-
-
 @app.route('/count', methods=['GET'])
 def get_count():
     doc_ref = db.collection(u'visitors').document(u'visitcount')
