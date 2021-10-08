@@ -14,7 +14,7 @@ db = firestore.Client()
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>This is the home of the pgbcloud.com visitor count API.</h1>"
+    return "<h1>This is the home of the pgbcloud.com visitor count API test.</h1>"
 
 
 # Set up a route to retrieve the current visitor count

@@ -21,7 +21,7 @@ class TestApp(unittest.TestCase):
 
     def test_hello(self):
         self.assertEqual(
-            home(), "<h1>This is the home of the pgbcloud.com visitor count API.</h1>")
+            home(), "<h1>This is the home of the pgbcloud.com visitor count API test.</h1>")
 
 
 if __name__ == '__main__':
