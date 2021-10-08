@@ -30,8 +30,7 @@ steps:
     id: Deploy
     entrypoint: gcloud
 # This step copies the applied manifest to the production branch
-# The COMMIT_SHA variable is automatically
-# replaced by Cloud Build.
+# The COMMIT_SHA variable is automatically replaced by Cloud Build.
   - name: 'gcr.io/cloud-builders/git'
     id: Copy to production branch
     entrypoint: /bin/sh
