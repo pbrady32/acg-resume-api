@@ -39,7 +39,7 @@ steps:
     - '-c'
     - |
       set -x && \
-      # Configure Git to create commits with Cloud Build's service account
+      # Configure Git to create commit with Cloud Build's service account
       git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
       # Switch to the production branch and copy the files from the candidate branch
       git fetch origin production && git checkout production && \
